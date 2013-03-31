@@ -1,0 +1,21 @@
+[Desktop Entry]
+Name=IMHO - Is My Hackerspace Open?
+Comment=Hackerspace-API plasmoid
+Icon=imho.png
+
+Type=Service
+X-KDE-ServiceTypes=Plasma/Applet
+X-Plasma-API=python
+X-Plasma-MainScript=code/imho.py
+X-Plasma-DefaultSize=200,100
+
+X-KDE-PluginInfo-Author=robelix
+X-KDE-PluginInfo-Email=imho@robelix.com
+X-KDE-PluginInfo-Name=IMHO
+X-KDE-PluginInfo-Version=0.1
+X-KDE-PluginInfo-Website=https://github.com/robelix/imho
+X-KDE-PluginInfo-Category=OnlineServices
+X-KDE-PluginInfo-Depends=
+X-KDE-PluginInfo-License=CC-BY-SA-3.0
+X-KDE-PluginInfo-EnabledByDefault=true
+
