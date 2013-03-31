@@ -27,7 +27,7 @@ class ImhoApplet(plasmascript.Applet):
         self.layout.setSpacing(0)
         self.layout.setItemSpacing(0,0)
         
-        image = QIcon( "contents/images/imho.png" );
+        image = QIcon( self.package().filePath("images")+"/imho.png" );
         self.imageDisplay = Plasma.IconWidget(self.applet)
         self.imageDisplay.setMaximumSize( QSizeF(800,800) )
         self.imageDisplay.setMinimumSize( QSizeF(8,8) )
@@ -75,13 +75,17 @@ class ImhoApplet(plasmascript.Applet):
         
     
     def updateStatus(self,jsonString):
-        self.jsonData = json.loads(jsonString)
-        oldstatus = self.status;
-        self.status = self.jsonData["open"]
+        try:
+            self.jsonData = json.loads(jsonString)
+            oldstatus = self.status;
+            self.status = self.jsonData["open"]
+        except:
+            self.displayErrorMessage("failed to decode hackerspace status")
+            return
+            
         if (oldstatus != self.status): 
             self.statusChanged()
             
-    
     
     def statusChanged(self):
         data_url = KUrl( self.getImageUrl() )
@@ -140,7 +144,10 @@ class ImhoApplet(plasmascript.Applet):
     
 
     def displayErrorMessage(self, message):
-        image = QIcon("contents/images/imho.png")
+        # reset status - to get statuschanged when connection is back again
+        self.status = None
+        
+        image = QIcon( self.package().filePath("images")+"/imho.png")
         self.imageDisplay.setIcon(image)
         
         Plasma.ToolTipManager.self().clearContent(self.applet)
